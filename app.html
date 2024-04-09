@@ -3,7 +3,6 @@
   <head>
     <script src="dist/fhir-client-v2.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
     <style>
       #main {
         background: lightgray;
@@ -13,32 +12,36 @@
       }
     </style>
   </head>
-
   <body>
     <div id="main"></div>
-
     <script>
+      var myApp = {};
 
-      var myApp = {}
+      FHIR.oauth2.ready().then(function (client) {
+        myApp.smart = client;
+        doRequests();
+      });
 
-        FHIR.oauth2.ready()
-        .then(function(client){
-          myApp.smart = client
-          doRequests()
-        })
+      async function doRequests() {
+        // Fetch MedicationOrder resources for the authenticated provider
+        var medicationOrders = await fetch(
+          myApp.smart.state.serverUrl + "/MedicationOrder",
+          {
+            headers: {
+              Accept: "application/json+fhir",
+              Authorization:
+                "Bearer " + myApp.smart.state.tokenResponse.access_token,
+            },
+          }
+        ).then(function (response) {
+          return response.json();
+        });
 
-        async function doRequests(){
-          var obs = await fetch(myApp.smart.state.serverUrl+"/Patient/"+myApp.smart.patient.id{
-            headers:{
-              "Accept":"application/json+fhir",
-              "Authorization":"Bearer "+myApp.smart.state.tokenResponse.access_token
-            }
-            }).then(function(data){
-              return data
-          })
+        console.log(medicationOrders);
 
-          var response = await obs.json()
-          console.log(response)
+        // Display some data
+        $("#main").text("Medication Orders: " + medicationOrders.total);
+      }
     </script>
   </body>
 </html>
