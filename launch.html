@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fhir.js/2.0.6/fhir-client.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-        .buttonload {
-            background-color: #04AA6D;
-            border: none;
-            color: white;
-            padding: 12px 24px;
-            font-size: 16px;
-        }
+      .buttonload {
+        background-color: #04aa6d;
+        border: none;
+        color: white;
+        padding: 12px 24px;
+        font-size: 16px;
+      }
 
-        .fa {
-            margin-left: -12px;
-            margin-right: 8px;
-        }
+      .fa {
+        margin-left: -12px;
+        margin-right: 8px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <button class="buttonload">
-        <i class="fa fa-spinner fa-spin"></i>Authorizing
+      <i class="fa fa-spinner fa-spin"></i>Authorizing
     </button>
     <h1>Authorizing Request...</h1>
     <script>
-        FHIR.oauth2.authorize({
-            'client_id': 'Your Client ID',
-            'scope':  'patient/*.read',
-            'redirect_uri': 'http://127.0.0.1:8000/app'
-        });
+      FHIR.oauth2.authorize({
+        client_id: "Our Client ID",
+        scope: "user/*.read",
+        redirect_uri: "http://127.0.0.1:8000/app",
+      });
     </script>
-</body>
+  </body>
 </html>
