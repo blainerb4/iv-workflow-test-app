@@ -30,7 +30,7 @@
     <script>
       FHIR.oauth2.authorize({
         client_id: "3fc75cc0-fab3-4621-87c1-8db665fdb5a6",
-        scope: "user/*.read",
+        scope: "openid fhirUser user/*.read",
         redirect_uri:
           "https://blainerb4.github.io/iv-workflow-test-app/app.html",
       });
